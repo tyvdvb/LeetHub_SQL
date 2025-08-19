@@ -7,7 +7,6 @@ WITH first_login AS(
     SELECT COUNT(DISTINCT f.player_id) AS num_logins
     FROM first_login f
     JOIN Activity a ON f.player_id = a.player_id AND f.initial_date = DATE_SUB(a.event_date, INTERVAL 1 DAY)
-    GROUP BY f.player_id
 )
 SELECT ROUND((SELECT num_logins FROM next_day_logins) / COUNT(*) ,2) AS fraction
 FROM first_login;
